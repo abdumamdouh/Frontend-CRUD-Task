@@ -44,7 +44,7 @@ On top of the assignment baseline, the project includes:
 - Tags filter modal.
 - Sorting by date, title, processing time, and fee.
 - Pagination with 9 services per page.
-- Filter state saved in the URL.
+- Filter state saved in URL params.
 - Loading skeletons.
 - Empty and error states.
 - Toast feedback for create, edit, delete, reset, favorite, and start actions.
@@ -89,18 +89,20 @@ Most wrappers are thin wrappers around UAE Design System React components. `AppM
 
 The UI also uses UAE Design System tokens and utility classes for color, spacing, badges, buttons, cards, form controls, and dark-mode adjustments.
 
+Fee amounts use the UAE Design System currency-symbol pattern, placing the Dirham symbol directly before the numeric value.
+
 ## Data And API Approach
 
 The app does not use a backend API. It uses 50 seeded UAE-style service records from:
 
 ```txt
-src/data/initialServices.ts
+src/features/Services/data/initialServices.ts
 ```
 
 The UI does not read from the seed data directly. All service operations go through:
 
 ```txt
-src/api/servicesApi.ts
+src/features/Services/services/services.service.ts
 ```
 
 That fake API returns Promises and adds a small delay so the app can show realistic loading states.
@@ -135,7 +137,7 @@ Filters are also client-side. The app supports:
 - Sort option.
 - Current page.
 
-Filter and sort state is stored in the URL query string so the current view can be refreshed or shared.
+Filter and sort state is stored in URL params/query string so the current view can be refreshed or shared.
 
 ## UI States
 
@@ -211,18 +213,13 @@ In short: this was not vibe coding. I planned and implemented the app, while usi
 
 ```txt
 src/
-  api/                 fake Promise API and localStorage persistence
   components/common/   reusable states, pagination, toast, dialogs
   components/layout/   app shell, header, navigation, footer
-  components/services/ service cards, toolbar, filters, form, banner
   config/              app constants
-  data/                50-item seed dataset
+  features/Services/   service routes, pages, hooks, components, API, data, types, and utils
   hooks/               useQuery, useDebounce, useLocalStorage
   i18n/                English and Arabic translations
-  pages/               services, favorites, details pages
   routes/              route configuration
-  types/               shared TypeScript types
-  utils/               filtering, sorting, pagination, formatting helpers
 ```
 
 ## Author

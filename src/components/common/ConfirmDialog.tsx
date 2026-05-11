@@ -26,6 +26,7 @@ export function ConfirmDialog({
     <AppModal
       isOpen={isOpen}
       title={title}
+      description={message}
       onClose={onCancel}
       maxWidthClassName="max-w-md"
     >

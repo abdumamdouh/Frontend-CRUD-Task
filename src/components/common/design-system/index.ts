@@ -2,6 +2,7 @@ export { AppBreadcrumbs } from "./AppBreadcrumbs";
 export { AppButton } from "./AppButton";
 export { AppCard } from "./AppCard";
 export { AppCheckbox } from "./AppCheckbox";
+export { AppCurrencyAmount } from "./AppCurrencyAmount";
 export { AppIconButton } from "./AppIconButton";
 export { AppInput } from "./AppInput";
 export { AppModal } from "./AppModal";

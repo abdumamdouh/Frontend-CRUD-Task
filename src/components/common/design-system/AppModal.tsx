@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import {
   Close,
   Content,
+  Description,
   Overlay,
   Portal,
   Root,
@@ -15,6 +16,7 @@ interface AppModalProps {
   title: string;
   children: ReactNode;
   onClose: () => void;
+  description?: string;
   maxWidthClassName?: string;
 }
 
@@ -23,6 +25,7 @@ export function AppModal({
   title,
   children,
   onClose,
+  description,
   maxWidthClassName = "max-w-2xl",
 }: AppModalProps) {
   const { t } = useTranslation();
@@ -39,6 +42,9 @@ export function AppModal({
             <Title className="text-xl font-bold text-aeblack-900 dark:text-whitely-50">
               {title}
             </Title>
+            <Description className="sr-only">
+              {description ?? title}
+            </Description>
             <Close
               className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
               aria-label={t("close")}

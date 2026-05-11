@@ -2,6 +2,7 @@ import { X } from "@phosphor-icons/react";
 import {
   Close,
   Content,
+  Description,
   Overlay,
   Portal,
   Root,
@@ -31,6 +32,9 @@ export function ProjectDrawer({ isOpen, onClose }: ProjectDrawerProps) {
             <Title className="text-xl font-bold text-aeblack-900">
               {t("projectOverview")}
             </Title>
+            <Description className="sr-only">
+              {t("projectOverview")}
+            </Description>
             <Close
               className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400"
               aria-label={t("close")}

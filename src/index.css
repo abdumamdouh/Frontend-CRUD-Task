@@ -541,6 +541,23 @@ textarea {
   color: color-mix(in oklab, var(--color-primary-50) 92%, white);
 }
 
+.app-currency-amount {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  white-space: nowrap;
+}
+
+.app-currency-symbol {
+  display: inline-block;
+  width: 1.05em;
+  height: 1em;
+  flex: 0 0 auto;
+  background: currentColor;
+  mask: url("/aed-symbol.svg") center / contain no-repeat;
+  -webkit-mask: url("/aed-symbol.svg") center / contain no-repeat;
+}
+
 .services-toolbar [class*="ring-secondary-400"],
 .services-toolbar [class*="ring-primary-400"] {
   --tw-ring-color: var(--color-slate-200);
@@ -833,11 +850,14 @@ textarea {
   left: 0.25rem !important;
   right: auto !important;
   top: 50% !important;
+  bottom: auto !important;
   display: grid !important;
   height: 1.25rem !important;
   width: 1.25rem !important;
   place-items: center !important;
-  translate: none !important;
+  --tw-translate-x: 0px !important;
+  --tw-translate-y: 0px !important;
+  translate: 0px 0px !important;
   transform: translateY(-50%) !important;
   color: var(--color-aeblack-900) !important;
 }
@@ -845,16 +865,37 @@ textarea {
 .app-theme-toggle [role="switch"][data-state="checked"] > span {
   left: calc(100% - 1.5rem) !important;
   right: auto !important;
-  translate: none !important;
+  --tw-translate-x: 0px !important;
+  --tw-translate-y: 0px !important;
+  translate: 0px 0px !important;
   transform: translateY(-50%) !important;
 }
 
 .app-theme-toggle [role="switch"] svg {
   display: block !important;
-  height: 1rem !important;
-  width: 1rem !important;
+  height: 0.875rem !important;
+  width: 0.875rem !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  transform: none !important;
 }
 
 [data-theme="dark"] .app-theme-toggle [role="switch"] > span {
   color: var(--color-whitely-50) !important;
+}
+
+.app-checkbox > [role="checkbox"]::before,
+.app-checkbox > button::before {
+  left: 50% !important;
+  right: auto !important;
+  top: 50% !important;
+  --tw-translate-x: 0px !important;
+  --tw-translate-y: 0px !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  translate: 0px 0px !important;
+}
+
+.app-checkbox > [role="checkbox"]:hover::before,
+.app-checkbox > button:hover::before {
+  transform: translate(-50%, -50%) scale(1) !important;
 }
