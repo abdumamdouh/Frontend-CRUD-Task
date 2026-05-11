@@ -31,6 +31,7 @@ export function ConfirmDialog({
       maxWidthClassName="max-w-md"
     >
       <p className="text-sm leading-6 text-slate-600">{message}</p>
+
       <div className="mt-6 flex justify-end gap-3">
         <AppButton
           variant="secondary"
@@ -39,6 +40,7 @@ export function ConfirmDialog({
         >
           {t("cancel")}
         </AppButton>
+
         <AppButton variant="danger" onClick={onConfirm} disabled={isConfirming}>
           {isConfirming ? t("deleting") : confirmLabel}
         </AppButton>

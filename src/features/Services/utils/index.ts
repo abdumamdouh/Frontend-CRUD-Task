@@ -1,15 +1,15 @@
-export { filterServices } from "./filterServices";
-export { getPageCount, paginate } from "./paginate";
+export { filterServices } from './filterServices';
+export { getPageCount, paginate } from './paginate';
+export { sortServices } from './sortServices';
+export { getServiceBannerLabel, getServiceBannerTheme } from './serviceImages';
 export {
-  categoryBadgeClass,
-  statusBadgeClass,
-  tagBadgeClass,
-} from "./serviceBadgeStyles";
-export { getServiceBannerLabel, getServiceBannerTheme } from "./serviceImages";
+	categoryBadgeClass,
+	statusBadgeClass,
+	tagBadgeClass,
+} from './serviceBadgeStyles';
 export {
-  getLocalizedService,
-  translateCategory,
-  translateStatus,
-  translateTag,
-} from "./serviceTranslations";
-export { sortServices } from "./sortServices";
+	getLocalizedService,
+	translateCategory,
+	translateStatus,
+	translateTag,
+} from './serviceTranslations';

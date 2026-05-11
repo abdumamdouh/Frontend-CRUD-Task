@@ -1,7 +1,7 @@
 export function formatCountLabel(
-  count: number,
-  singular: string,
-  plural: string,
+	count: number,
+	singular: string,
+	plural: string
 ): string {
-  return count === 1 ? `1 ${singular}` : `${count} ${plural}`;
+	return count === 1 ? `1 ${singular}` : `${count} ${plural}`;
 }

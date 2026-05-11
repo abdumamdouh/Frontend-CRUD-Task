@@ -1,318 +1,328 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router-dom";
-import { appTheme } from "../../../config/theme";
-import { useToast } from "../../../components/common/toastContext";
-import { useDebounce } from "../../../hooks/useDebounce";
-import { useQuery } from "../../../hooks/useQuery";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
+import { appTheme } from '../../../config/theme';
+import { useToast } from '../../../components/common/toastContext';
+import { useDebounce } from '../../../hooks/useDebounce';
+import { useQuery } from '../../../hooks/useQuery';
 import {
-  categories,
-  serviceSortOptions,
-  statuses,
-  tags,
-} from "../constants/serviceOptions";
-import { servicesApi } from "../services/services.service";
+	categories,
+	serviceSortOptions,
+	statuses,
+	tags,
+} from '../constants/serviceOptions';
+import { servicesApi } from '../services/services.service';
 import type {
-  Service,
-  ServiceCategory,
-  ServiceFilters,
-  ServicePayload,
-  ServiceTag,
-  SortOption,
-} from "../types/service";
-import { filterServices } from "../utils/filterServices";
-import { getPageCount, paginate } from "../utils/paginate";
-import { getLocalizedService } from "../utils/serviceTranslations";
-import { sortServices } from "../utils/sortServices";
+	Service,
+	ServiceCategory,
+	ServiceFilters,
+	ServicePayload,
+	ServiceTag,
+	SortOption,
+} from '../types/service';
+import { filterServices } from '../utils/filterServices';
+import { getPageCount, paginate } from '../utils/paginate';
+import { getLocalizedService } from '../utils/serviceTranslations';
+import { sortServices } from '../utils/sortServices';
 
-type ToolbarFilters = Omit<ServiceFilters, "searchTerm">;
+type ToolbarFilters = Omit<ServiceFilters, 'searchTerm'>;
 
 const defaultFilters: ToolbarFilters = {
-  category: "",
-  statuses: [],
-  tags: [],
-  popularOnly: false,
-};
-
-const parseListParam = <TItem extends string>(
-  value: string | null,
-  allowed: TItem[],
-) =>
-  (value
-    ?.split(",")
-    .filter((item): item is TItem => allowed.includes(item as TItem)) ??
-    []) as TItem[];
-
-const getInitialFilters = (searchParams: URLSearchParams): ToolbarFilters => ({
-  category: categories.includes(searchParams.get("category") as ServiceCategory)
-    ? (searchParams.get("category") as ServiceCategory)
-    : "",
-  statuses: parseListParam(searchParams.get("status"), statuses),
-  tags: parseListParam(searchParams.get("tags"), tags),
-  popularOnly: searchParams.get("popular") === "true",
-});
-
-const getInitialSort = (searchParams: URLSearchParams): SortOption => {
-  const sort = searchParams.get("sort") as SortOption | null;
-  return sort && serviceSortOptions.includes(sort) ? sort : "newest";
-};
-
-const getInitialPage = (searchParams: URLSearchParams) => {
-  const page = Number(searchParams.get("page"));
-  return Number.isFinite(page) && page > 0 ? page : 1;
+	category: '',
+	statuses: [],
+	tags: [],
+	popularOnly: false,
 };
 
 export function useServicesDirectory() {
-  const { t, i18n } = useTranslation();
-  const { showToast } = useToast();
-  const [searchParams, setSearchParams] = useSearchParams();
+	const { t, i18n } = useTranslation();
+	const { showToast } = useToast();
+	const [searchParams, setSearchParams] = useSearchParams();
 
-  const {
-    data: services,
-    isLoading,
-    error,
-    refetch,
-    setData,
-  } = useQuery<Service[]>({
-    queryFn: servicesApi.getServices,
-    initialData: [],
-  });
+	const {
+		data: services,
+		isLoading,
+		error,
+		refetch,
+		setData,
+	} = useQuery<Service[]>({
+		queryFn: servicesApi.getServices,
+		initialData: [],
+	});
 
-  const [searchTerm, setSearchTerm] = useState(
-    () => searchParams.get("q") ?? "",
-  );
-  const debouncedSearchTerm = useDebounce(searchTerm, appTheme.debounceDelay);
-  const [filters, setFilters] = useState<ToolbarFilters>(() =>
-    getInitialFilters(searchParams),
-  );
-  const [sortOption, setSortOption] = useState<SortOption>(() =>
-    getInitialSort(searchParams),
-  );
-  const [currentPage, setCurrentPage] = useState(() =>
-    getInitialPage(searchParams),
-  );
-  const [editingService, setEditingService] = useState<Service | null>(null);
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [favoriteBusyId, setFavoriteBusyId] = useState<string | null>(null);
-  const [deletingId, setDeletingId] = useState<string | null>(null);
-  const [servicePendingDelete, setServicePendingDelete] =
-    useState<Service | null>(null);
-  const [isResetting, setIsResetting] = useState(false);
-  const didMountRef = useRef(false);
+	const [searchTerm, setSearchTerm] = useState(
+		() => searchParams.get('q') ?? ''
+	);
 
-  useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
-      return;
-    }
-    setCurrentPage(1);
-  }, [debouncedSearchTerm, filters, sortOption]);
+	const debouncedSearchTerm = useDebounce(searchTerm, appTheme.debounceDelay);
 
-  useEffect(() => {
-    const nextParams = new URLSearchParams();
-    if (searchTerm.trim()) nextParams.set("q", searchTerm.trim());
-    if (filters.category) nextParams.set("category", filters.category);
-    if (filters.statuses.length)
-      nextParams.set("status", filters.statuses.join(","));
-    if (filters.tags.length) nextParams.set("tags", filters.tags.join(","));
-    if (filters.popularOnly) nextParams.set("popular", "true");
-    if (sortOption !== "newest") nextParams.set("sort", sortOption);
-    if (currentPage > 1) nextParams.set("page", String(currentPage));
-    setSearchParams(nextParams, { replace: true });
-  }, [currentPage, filters, searchTerm, setSearchParams, sortOption]);
+	const [filters, setFilters] = useState<ToolbarFilters>(() =>
+		getInitialFilters(searchParams)
+	);
 
-  const filteredServices = useMemo(
-    () =>
-      filterServices(
-        services,
-        { searchTerm: debouncedSearchTerm, ...filters },
-        i18n.language,
-      ),
-    [debouncedSearchTerm, filters, i18n.language, services],
-  );
+	const [sortOption, setSortOption] = useState<SortOption>(() =>
+		getInitialSort(searchParams)
+	);
 
-  const sortedServices = useMemo(
-    () => sortServices(filteredServices, sortOption),
-    [filteredServices, sortOption],
-  );
+	const [currentPage, setCurrentPage] = useState(() =>
+		getInitialPage(searchParams)
+	);
 
-  const pageCount = getPageCount(sortedServices.length, appTheme.pageSize);
-  const pageServices = useMemo(
-    () => paginate(sortedServices, currentPage, appTheme.pageSize),
-    [currentPage, sortedServices],
-  );
+	const [editingService, setEditingService] = useState<Service | null>(null);
+	const [isFormOpen, setIsFormOpen] = useState(false);
+	const [isSaving, setIsSaving] = useState(false);
+	const [favoriteBusyId, setFavoriteBusyId] = useState<string | null>(null);
+	const [deletingId, setDeletingId] = useState<string | null>(null);
+	const [servicePendingDelete, setServicePendingDelete] =
+		useState<Service | null>(null);
+	const [isResetting, setIsResetting] = useState(false);
+	const didMountRef = useRef(false);
 
-  const changePage = useCallback((page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+	useEffect(() => {
+		if (!didMountRef.current) {
+			didMountRef.current = true;
+			return;
+		}
+		setCurrentPage(1);
+	}, [debouncedSearchTerm, filters, sortOption]);
 
-  const handleFiltersChange = useCallback((patch: Partial<ToolbarFilters>) => {
-    setFilters((current) => ({ ...current, ...patch }));
-  }, []);
+	useEffect(() => {
+		const nextParams = new URLSearchParams();
+		if (searchTerm.trim()) nextParams.set('q', searchTerm.trim());
+		if (filters.category) nextParams.set('category', filters.category);
+		if (filters.statuses.length)
+			nextParams.set('status', filters.statuses.join(','));
+		if (filters.tags.length) nextParams.set('tags', filters.tags.join(','));
+		if (filters.popularOnly) nextParams.set('popular', 'true');
+		if (sortOption !== 'newest') nextParams.set('sort', sortOption);
+		if (currentPage > 1) nextParams.set('page', String(currentPage));
+		setSearchParams(nextParams, { replace: true });
+	}, [currentPage, filters, searchTerm, setSearchParams, sortOption]);
 
-  const resetFilters = useCallback(() => {
-    setSearchTerm("");
-    setFilters(defaultFilters);
-    setSortOption("newest");
-    setCurrentPage(1);
-  }, []);
+	const filteredServices = useMemo(
+		() =>
+			filterServices(
+				services,
+				{ searchTerm: debouncedSearchTerm, ...filters },
+				i18n.language
+			),
+		[debouncedSearchTerm, filters, i18n.language, services]
+	);
 
-  const openCreateForm = useCallback(() => {
-    setEditingService(null);
-    setIsFormOpen(true);
-  }, []);
+	const sortedServices = useMemo(
+		() => sortServices(filteredServices, sortOption),
+		[filteredServices, sortOption]
+	);
 
-  const openEditForm = useCallback((service: Service) => {
-    setEditingService(service);
-    setIsFormOpen(true);
-  }, []);
+	const pageCount = getPageCount(sortedServices.length, appTheme.pageSize);
 
-  const closeForm = useCallback(() => {
-    setIsFormOpen(false);
-  }, []);
+	const pageServices = useMemo(
+		() => paginate(sortedServices, currentPage, appTheme.pageSize),
+		[currentPage, sortedServices]
+	);
 
-  const handleStartService = useCallback(
-    (service: Service) => {
-      const localizedService = getLocalizedService(service, i18n.language);
-      showToast(t("feedback.started", { title: localizedService.title }));
-    },
-    [i18n.language, showToast, t],
-  );
+	const changePage = useCallback((page: number) => {
+		setCurrentPage(page);
+		scrollToTop();
+	}, []);
 
-  const handleTagFilter = useCallback((tag: ServiceTag) => {
-    setFilters((current) => ({
-      ...current,
-      tags: current.tags.includes(tag) ? current.tags : [...current.tags, tag],
-    }));
-    setCurrentPage(1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+	const handleFiltersChange = useCallback((patch: Partial<ToolbarFilters>) => {
+		setFilters((current) => ({ ...current, ...patch }));
+	}, []);
 
-  const handleSubmit = useCallback(
-    async (payload: ServicePayload) => {
-      setIsSaving(true);
-      try {
-        const isEditing = Boolean(editingService);
-        const nextServices = editingService
-          ? await servicesApi.updateService(
-              editingService.id,
-              payload,
-              i18n.language,
-            )
-          : await servicesApi.createService(payload);
-        setData(nextServices);
-        setIsFormOpen(false);
-        setEditingService(null);
-        showToast(t(isEditing ? "feedback.updated" : "feedback.created"));
-      } catch {
-        showToast(t("feedback.failed"), "error");
-      } finally {
-        setIsSaving(false);
-      }
-    },
-    [editingService, i18n.language, setData, showToast, t],
-  );
+	const resetFilters = useCallback(() => {
+		setSearchTerm('');
+		setFilters(defaultFilters);
+		setSortOption('newest');
+		setCurrentPage(1);
+	}, []);
 
-  const handleToggleFavorite = useCallback(
-    async (id: string) => {
-      setFavoriteBusyId(id);
-      try {
-        const wasFavorite = services.find(
-          (service) => service.id === id,
-        )?.isFavorite;
-        const nextServices = await servicesApi.toggleFavorite(id);
-        setData(nextServices);
-        showToast(
-          t(
-            wasFavorite ? "feedback.favoriteRemoved" : "feedback.favoriteAdded",
-          ),
-        );
-      } catch {
-        showToast(t("feedback.failed"), "error");
-      } finally {
-        setFavoriteBusyId(null);
-      }
-    },
-    [services, setData, showToast, t],
-  );
+	const openCreateForm = useCallback(() => {
+		setEditingService(null);
+		setIsFormOpen(true);
+	}, []);
 
-  const openDeleteDialog = useCallback((service: Service) => {
-    setServicePendingDelete(service);
-  }, []);
+	const openEditForm = useCallback((service: Service) => {
+		setEditingService(service);
+		setIsFormOpen(true);
+	}, []);
 
-  const closeDeleteDialog = useCallback(() => {
-    setServicePendingDelete(null);
-  }, []);
+	const closeForm = useCallback(() => {
+		setIsFormOpen(false);
+	}, []);
 
-  const handleConfirmDelete = useCallback(async () => {
-    if (!servicePendingDelete) return;
-    setDeletingId(servicePendingDelete.id);
-    try {
-      const nextServices = await servicesApi.deleteService(
-        servicePendingDelete.id,
-      );
-      setData(nextServices);
-      setServicePendingDelete(null);
-      showToast(t("feedback.deleted"));
-    } catch {
-      showToast(t("feedback.failed"), "error");
-    } finally {
-      setDeletingId(null);
-    }
-  }, [servicePendingDelete, setData, showToast, t]);
+	const handleStartService = useCallback(
+		(service: Service) => {
+			const serviceTitle = getLocalizedService(service, i18n.language).title;
+			showToast(t('feedback.started', { title: serviceTitle }));
+		},
+		[i18n.language, showToast, t]
+	);
 
-  const handleResetData = useCallback(async () => {
-    setIsResetting(true);
-    try {
-      const nextServices = await servicesApi.resetServices();
-      setData(nextServices);
-      resetFilters();
-      showToast(t("feedback.reset"));
-    } catch {
-      showToast(t("feedback.failed"), "error");
-    } finally {
-      setIsResetting(false);
-    }
-  }, [resetFilters, setData, showToast, t]);
+	const handleTagFilter = useCallback((tag: ServiceTag) => {
+		setFilters((current) => ({
+			...current,
+			tags: current.tags.includes(tag) ? current.tags : [...current.tags, tag],
+		}));
+		setCurrentPage(1);
+		scrollToTop();
+	}, []);
 
-  return {
-    currentPage,
-    deletingId,
-    editingService,
-    error,
-    favoriteBusyId,
-    filters,
-    handleConfirmDelete,
-    handleFiltersChange,
-    handleResetData,
-    handleStartService,
-    handleSubmit,
-    handleTagFilter,
-    handleToggleFavorite,
-    i18n,
-    isFormOpen,
-    isLoading,
-    isResetting,
-    isSaving,
-    openCreateForm,
-    openDeleteDialog,
-    openEditForm,
-    pageCount,
-    pageServices,
-    refetch,
-    resetFilters,
-    searchTerm,
-    servicePendingDelete,
-    services,
-    setSearchTerm,
-    setSortOption,
-    sortedServices,
-    sortOption,
-    t,
-    changePage,
-    closeDeleteDialog,
-    closeForm,
-  };
+	const handleSubmit = useCallback(
+		async (payload: ServicePayload) => {
+			setIsSaving(true);
+			try {
+				const isEditing = Boolean(editingService);
+				const feedbackKey = isEditing ? 'feedback.updated' : 'feedback.created';
+				const nextServices = editingService
+					? await servicesApi.updateService(
+							editingService.id,
+							payload,
+							i18n.language
+						)
+					: await servicesApi.createService(payload);
+				setData(nextServices);
+				setIsFormOpen(false);
+				setEditingService(null);
+				showToast(t(feedbackKey));
+			} catch {
+				showToast(t('feedback.failed'), 'error');
+			} finally {
+				setIsSaving(false);
+			}
+		},
+		[editingService, i18n.language, setData, showToast, t]
+	);
+
+	const handleToggleFavorite = useCallback(
+		async (id: string) => {
+			setFavoriteBusyId(id);
+			try {
+				const wasFavorite = services.find(
+					(service) => service.id === id
+				)?.isFavorite;
+				const feedbackKey = wasFavorite
+					? 'feedback.favoriteRemoved'
+					: 'feedback.favoriteAdded';
+				const nextServices = await servicesApi.toggleFavorite(id);
+				setData(nextServices);
+				showToast(t(feedbackKey));
+			} catch {
+				showToast(t('feedback.failed'), 'error');
+			} finally {
+				setFavoriteBusyId(null);
+			}
+		},
+		[services, setData, showToast, t]
+	);
+
+	const openDeleteDialog = useCallback((service: Service) => {
+		setServicePendingDelete(service);
+	}, []);
+
+	const closeDeleteDialog = useCallback(() => {
+		setServicePendingDelete(null);
+	}, []);
+
+	const handleConfirmDelete = useCallback(async () => {
+		if (!servicePendingDelete) return;
+		setDeletingId(servicePendingDelete.id);
+		try {
+			const nextServices = await servicesApi.deleteService(
+				servicePendingDelete.id
+			);
+			setData(nextServices);
+			setServicePendingDelete(null);
+			showToast(t('feedback.deleted'));
+		} catch {
+			showToast(t('feedback.failed'), 'error');
+		} finally {
+			setDeletingId(null);
+		}
+	}, [servicePendingDelete, setData, showToast, t]);
+
+	const handleResetData = useCallback(async () => {
+		setIsResetting(true);
+		try {
+			const nextServices = await servicesApi.resetServices();
+			setData(nextServices);
+			resetFilters();
+			showToast(t('feedback.reset'));
+		} catch {
+			showToast(t('feedback.failed'), 'error');
+		} finally {
+			setIsResetting(false);
+		}
+	}, [resetFilters, setData, showToast, t]);
+
+	return {
+		currentPage,
+		deletingId,
+		editingService,
+		error,
+		favoriteBusyId,
+		filters,
+		handleConfirmDelete,
+		handleFiltersChange,
+		handleResetData,
+		handleStartService,
+		handleSubmit,
+		handleTagFilter,
+		handleToggleFavorite,
+		i18n,
+		isFormOpen,
+		isLoading,
+		isResetting,
+		isSaving,
+		openCreateForm,
+		openDeleteDialog,
+		openEditForm,
+		pageCount,
+		pageServices,
+		refetch,
+		resetFilters,
+		searchTerm,
+		servicePendingDelete,
+		services,
+		setSearchTerm,
+		setSortOption,
+		sortedServices,
+		sortOption,
+		t,
+		changePage,
+		closeDeleteDialog,
+		closeForm,
+	};
 }
+
+const scrollToTop = () => {
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const parseListParam = <TItem extends string>(
+	value: string | null,
+	allowed: TItem[]
+) =>
+	(value
+		?.split(',')
+		.filter((item): item is TItem => allowed.includes(item as TItem)) ??
+		[]) as TItem[];
+
+const getInitialFilters = (searchParams: URLSearchParams): ToolbarFilters => ({
+	category: categories.includes(searchParams.get('category') as ServiceCategory)
+		? (searchParams.get('category') as ServiceCategory)
+		: '',
+	statuses: parseListParam(searchParams.get('status'), statuses),
+	tags: parseListParam(searchParams.get('tags'), tags),
+	popularOnly: searchParams.get('popular') === 'true',
+});
+
+const getInitialSort = (searchParams: URLSearchParams): SortOption => {
+	const sort = searchParams.get('sort') as SortOption | null;
+	return sort && serviceSortOptions.includes(sort) ? sort : 'newest';
+};
+
+const getInitialPage = (searchParams: URLSearchParams) => {
+	const page = Number(searchParams.get('page'));
+	return Number.isFinite(page) && page > 0 ? page : 1;
+};
