@@ -1,0 +1,202 @@
+.app-currency-amount {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  white-space: nowrap;
+}
+
+.app-currency-symbol {
+  display: inline-block;
+  width: 1.05em;
+  height: 1em;
+  flex: 0 0 auto;
+  background: currentColor;
+  mask: url("/aed-symbol.svg") center / contain no-repeat;
+  -webkit-mask: url("/aed-symbol.svg") center / contain no-repeat;
+}
+
+.services-toolbar [class*="ring-secondary-400"],
+.services-toolbar [class*="ring-primary-400"] {
+  --tw-ring-color: var(--color-slate-200);
+}
+
+.services-toolbar [class*="focus-within:ring-secondary-600"]:focus-within,
+.services-toolbar [class*="focus-within:ring-primary-400"]:focus-within {
+  --tw-ring-color: var(--color-primary-200);
+}
+
+.services-toolbar [class*="shadow-sm"] {
+  --tw-shadow:
+    0 1px 2px color-mix(in oklab, var(--color-aeblack-900) 5%, transparent),
+    0 1px 8px color-mix(in oklab, var(--color-aeblack-900) 4%, transparent);
+  box-shadow:
+    var(--tw-inset-shadow), var(--tw-inset-ring-shadow),
+    var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+
+.app-field,
+.app-select {
+  --tw-ring-color: var(--color-slate-200);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--color-aeblack-900) 4%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, var(--color-slate-200) 70%, transparent);
+}
+
+.app-field:focus-within,
+.app-select:focus,
+.app-select[data-state="open"] {
+  --tw-ring-color: var(--color-primary-200);
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--color-primary-100) 70%, transparent),
+    inset 0 0 0 1px var(--color-primary-200);
+}
+
+.app-field input::placeholder,
+.app-field textarea::placeholder {
+  color: var(--color-slate-400);
+  opacity: 1;
+}
+
+[data-radix-popper-content-wrapper] [role="listbox"] {
+  background: var(--color-whitely-50);
+}
+
+[data-radix-popper-content-wrapper] [role="option"] {
+  background: var(--color-whitely-50);
+}
+
+[data-radix-popper-content-wrapper] [role="option"][data-highlighted] {
+  background: var(--color-primary-50);
+}
+
+.app-pagination {
+  width: fit-content;
+  margin-inline: auto;
+  border: 1px solid var(--color-slate-200);
+  border-radius: 0.75rem;
+  background: var(--color-whitely-50);
+  padding: 0.625rem 0.75rem;
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--color-aeblack-900) 5%, transparent),
+    0 8px 22px color-mix(in oklab, var(--color-aeblack-900) 4%, transparent);
+}
+
+.app-pagination button {
+  border-radius: 0.5rem;
+  min-height: 2.5rem;
+  padding-inline: 0.75rem;
+}
+
+.app-pagination button:not(:disabled):hover {
+  background: var(--color-primary-50);
+}
+
+.app-breadcrumbs [class*="max-w-"] {
+  max-width: min(72vw, 56rem);
+}
+
+.app-breadcrumbs a {
+  text-decoration: none;
+}
+
+.app-breadcrumbs .truncate {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+[data-theme="dark"] .app-breadcrumbs,
+[data-theme="dark"] .app-breadcrumbs a,
+[data-theme="dark"] .app-breadcrumbs li,
+[data-theme="dark"] .app-breadcrumbs span,
+[data-theme="dark"] .app-breadcrumbs svg {
+  color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 76%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .app-breadcrumbs a:hover {
+  color: var(--color-whitely-50) !important;
+}
+.app-theme-toggle {
+  height: 2rem !important;
+  width: 3.5rem !important;
+}
+
+.app-theme-toggle > span:last-child {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.app-theme-toggle [role="switch"] {
+  position: relative !important;
+  height: 1.75rem !important;
+  width: 3.5rem !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+.app-theme-toggle [role="switch"] > span {
+  position: absolute !important;
+  left: 0.25rem !important;
+  right: auto !important;
+  top: 50% !important;
+  bottom: auto !important;
+  display: grid !important;
+  height: 1.25rem !important;
+  width: 1.25rem !important;
+  place-items: center !important;
+  --tw-translate-x: 0px !important;
+  --tw-translate-y: 0px !important;
+  translate: 0px 0px !important;
+  transform: translateY(-50%) !important;
+  color: var(--color-aeblack-900) !important;
+}
+
+.app-theme-toggle [role="switch"][data-state="checked"] > span {
+  left: calc(100% - 1.5rem) !important;
+  right: auto !important;
+  --tw-translate-x: 0px !important;
+  --tw-translate-y: 0px !important;
+  translate: 0px 0px !important;
+  transform: translateY(-50%) !important;
+}
+
+.app-theme-toggle [role="switch"] svg {
+  display: block !important;
+  height: 0.875rem !important;
+  width: 0.875rem !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+[data-theme="dark"] .app-theme-toggle [role="switch"] > span {
+  color: var(--color-whitely-50) !important;
+}
+
+.app-checkbox > [role="checkbox"]::before,
+.app-checkbox > button::before {
+  left: 50% !important;
+  right: auto !important;
+  top: 50% !important;
+  --tw-translate-x: 0px !important;
+  --tw-translate-y: 0px !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  translate: 0px 0px !important;
+}
+
+.app-checkbox > [role="checkbox"]:hover::before,
+.app-checkbox > button:hover::before {
+  transform: translate(-50%, -50%) scale(1) !important;
+}

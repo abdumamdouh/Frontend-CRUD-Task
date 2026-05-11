@@ -1,0 +1,49 @@
+.service-banner {
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, white 35%, transparent);
+}
+
+[data-theme="dark"] .service-banner {
+  filter: saturate(0.86) brightness(0.9);
+  box-shadow: inset 0 0 0 1px
+    color-mix(in oklab, var(--color-whitely-50) 18%, transparent);
+}
+
+.service-card-description {
+  display: -webkit-box !important;
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.25rem !important;
+}
+
+.service-chip.bg-seablue-50 {
+  background-color: var(--color-seablue-50) !important;
+  color: var(--color-seablue-800) !important;
+}
+
+.service-chip.bg-techblue-50 {
+  background-color: var(--color-techblue-50) !important;
+  color: var(--color-techblue-800) !important;
+}
+
+.service-chip.bg-aegreen-50 {
+  background-color: var(--color-aegreen-50) !important;
+  color: var(--color-aegreen-800) !important;
+}
+
+.service-chip.bg-primary-50 {
+  background-color: var(--color-primary-50) !important;
+  color: var(--color-primary-800) !important;
+}
+
+.service-chip.bg-secondary-50 {
+  background-color: var(--color-secondary-50) !important;
+  color: var(--color-secondary-800) !important;
+}
+
+.service-chip.bg-aered-50 {
+  background-color: var(--color-aered-50) !important;
+  color: var(--color-aered-800) !important;
+}

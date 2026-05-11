@@ -105,7 +105,13 @@ npm run lint
 npm run format
 ```
 
-The project uses Prettier defaults.
+Check formatting without writing files:
+
+```bash
+npm run format:check
+```
+
+The project uses an explicit Prettier config in `.prettierrc`, plus `.editorconfig` and workspace VS Code settings. This keeps editor format-on-save aligned with the CLI formatter.
 
 ## Available Scripts
 
@@ -118,7 +124,8 @@ The project uses Prettier defaults.
   "test:ui": "vitest --ui",
   "test:coverage": "vitest --coverage",
   "lint": "eslint .",
-  "format": "prettier --write ."
+  "format": "prettier --write .",
+  "format:check": "prettier --check ."
 }
 ```
 
@@ -139,6 +146,8 @@ Reset data
 This restores the original 50 services and clears local CRUD/favorite changes.
 
 You can also clear the browser storage manually during development.
+
+The services page also stores the latest search, filters, sort, and page in localStorage so that navigating away and returning to Services keeps the browsing context. The URL query string still takes priority when route params are present.
 
 ## Vercel Deployment
 

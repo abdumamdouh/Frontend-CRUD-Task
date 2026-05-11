@@ -1,0 +1,103 @@
+.markdown-doc {
+  color: var(--color-slate-700);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.markdown-doc > * + * {
+  margin-top: 1rem;
+}
+
+.markdown-doc h1 {
+  color: var(--color-aeblack-900);
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.markdown-doc h2 {
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--color-slate-200);
+  padding-top: 1.25rem;
+  color: var(--color-aeblack-900);
+  font-size: 1.125rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.markdown-doc h3 {
+  color: var(--color-aeblack-800);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.markdown-doc ul {
+  display: grid;
+  gap: 0.45rem;
+  list-style: disc;
+  padding-inline-start: 1.25rem;
+}
+
+.markdown-doc a {
+  color: var(--color-primary-700);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.markdown-doc a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.markdown-doc pre {
+  overflow-x: auto;
+  border: 1px solid var(--color-slate-200);
+  border-radius: 0.75rem;
+  background: var(--color-whitely-50);
+  padding: 1rem;
+  color: var(--color-aeblack-800);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.markdown-inline-code {
+  border-radius: 0.375rem;
+  background: var(--color-primary-50);
+  padding: 0.1rem 0.35rem;
+  color: var(--color-primary-800);
+  font-size: 0.86em;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .markdown-doc {
+  color: color-mix(in oklab, var(--color-whitely-50) 78%, transparent);
+}
+
+[data-theme="dark"] .markdown-doc h1,
+[data-theme="dark"] .markdown-doc h2,
+[data-theme="dark"] .markdown-doc h3 {
+  color: var(--color-whitely-50);
+}
+
+[data-theme="dark"] .markdown-doc h2 {
+  border-color: color-mix(in oklab, var(--color-whitely-50) 16%, transparent);
+}
+
+[data-theme="dark"] .markdown-doc a {
+  color: color-mix(in oklab, var(--color-primary-100) 88%, white);
+}
+
+[data-theme="dark"] .markdown-doc pre {
+  border-color: color-mix(in oklab, var(--color-whitely-50) 16%, transparent);
+  background: color-mix(in oklab, var(--color-aeblack-800) 78%, black);
+  color: color-mix(in oklab, var(--color-whitely-50) 86%, transparent);
+}
+
+[data-theme="dark"] .markdown-inline-code {
+  background: color-mix(
+    in oklab,
+    var(--color-primary-700) 34%,
+    var(--color-aeblack-800)
+  );
+  color: color-mix(in oklab, var(--color-primary-50) 92%, white);
+}

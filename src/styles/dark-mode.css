@@ -1,0 +1,423 @@
+[data-theme="dark"] {
+  color-scheme: dark;
+  color: var(--color-whitely-50);
+  background: var(--color-aeblack-900);
+}
+
+[data-theme="dark"] body,
+[data-theme="dark"] main {
+  background:
+    radial-gradient(
+      circle at top,
+      color-mix(in oklab, var(--color-primary-900) 18%, transparent),
+      transparent 34rem
+    ),
+    var(--color-aeblack-900);
+  color: var(--color-whitely-50);
+}
+
+[data-theme="dark"] header,
+[data-theme="dark"] .bg-whitely-50,
+[data-theme="dark"] .bg-whitely-50\/95,
+[data-theme="dark"] .bg-white {
+  background-color: color-mix(
+    in oklab,
+    var(--color-aeblack-800) 92%,
+    black
+  ) !important;
+}
+
+[data-theme="dark"] header,
+[data-theme="dark"] .border-slate-200,
+[data-theme="dark"] .border-primary-100 {
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 14%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .text-aeblack-800,
+[data-theme="dark"] .text-aeblack-900,
+[data-theme="dark"] .text-secondary-800,
+[data-theme="dark"] .text-secondary-900,
+[data-theme="dark"] .text-gray-900,
+[data-theme="dark"] .text-gray-800,
+[data-theme="dark"] .text-gray-700,
+[data-theme="dark"] .text-slate-700,
+[data-theme="dark"] .text-slate-600 {
+  color: var(--color-whitely-50) !important;
+}
+
+[data-theme="dark"] .text-gray-500,
+[data-theme="dark"] .text-gray-400,
+[data-theme="dark"] .text-slate-500 {
+  color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 72%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .app-modal-content {
+  background-color: color-mix(
+    in oklab,
+    var(--color-aeblack-800) 90%,
+    black
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 18%,
+    transparent
+  ) !important;
+  color: var(--color-whitely-50);
+}
+
+[data-theme="dark"] .app-modal-content label,
+[data-theme="dark"] .app-modal-content legend,
+[data-theme="dark"] .app-modal-content [class*="text-gray-900"],
+[data-theme="dark"] .app-modal-content [class*="text-slate-700"] {
+  color: var(--color-whitely-50) !important;
+}
+
+[data-theme="dark"] .app-modal-content .border-t,
+[data-theme="dark"] .app-modal-content .border-b,
+[data-theme="dark"] .app-modal-content .border-slate-200 {
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 16%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .app-drawer-content {
+  background-color: color-mix(
+    in oklab,
+    var(--color-aeblack-800) 92%,
+    black
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 16%,
+    transparent
+  ) !important;
+  color: var(--color-whitely-50);
+}
+
+[data-theme="dark"] .app-drawer-content .border-b,
+[data-theme="dark"] .app-drawer-content .border-slate-200 {
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 14%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .app-drawer-content button:hover {
+  background-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 10%,
+    var(--color-aeblack-800)
+  ) !important;
+}
+[data-theme="dark"] .shadow-sm,
+[data-theme="dark"] .shadow-soft {
+  box-shadow:
+    0 1px 2px color-mix(in oklab, black 24%, transparent),
+    0 18px 42px color-mix(in oklab, black 22%, transparent) !important;
+}
+
+[data-theme="dark"] .bg-primary-50,
+[data-theme="dark"] .hover\:bg-primary-50\/25:hover {
+  background-color: color-mix(
+    in oklab,
+    var(--color-primary-900) 26%,
+    var(--color-aeblack-800)
+  ) !important;
+}
+
+[data-theme="dark"] .bg-secondary-50,
+[data-theme="dark"] .bg-slate-100 {
+  background-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 9%,
+    var(--color-aeblack-800)
+  ) !important;
+}
+
+[data-theme="dark"] .services-toolbar,
+[data-theme="dark"] .app-pagination,
+[data-theme="dark"] article.bg-white,
+[data-theme="dark"] .rounded-lg.bg-whitely-50 {
+  background-color: color-mix(
+    in oklab,
+    var(--color-aeblack-800) 86%,
+    black
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 18%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .services-toolbar .bg-white,
+[data-theme="dark"] .services-toolbar .bg-whitely-50 {
+  background-color: color-mix(
+    in oklab,
+    var(--color-aeblack-800) 78%,
+    black
+  ) !important;
+}
+
+[data-theme="dark"] .services-toolbar strong,
+[data-theme="dark"] .services-toolbar label,
+[data-theme="dark"] .services-toolbar legend {
+  color: var(--color-whitely-50) !important;
+}
+
+[data-theme="dark"] .services-toolbar .aegov-badge {
+  background-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 10%,
+    var(--color-aeblack-800)
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 16%,
+    transparent
+  ) !important;
+  color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 88%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .border-secondary-100.bg-white,
+[data-theme="dark"] button.bg-secondary-50,
+[data-theme="dark"] a.bg-white {
+  background-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 8%,
+    var(--color-aeblack-800)
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 24%,
+    transparent
+  ) !important;
+  color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 84%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .border-secondary-100.bg-white:hover,
+[data-theme="dark"] button.bg-secondary-50:hover,
+[data-theme="dark"] a.bg-white:hover {
+  background-color: color-mix(
+    in oklab,
+    var(--color-primary-700) 18%,
+    var(--color-aeblack-800)
+  ) !important;
+  color: var(--color-whitely-50) !important;
+}
+
+[data-theme="dark"] .app-field,
+[data-theme="dark"] .app-select,
+[data-theme="dark"] [data-radix-popper-content-wrapper] [role="listbox"] {
+  background: color-mix(
+    in oklab,
+    var(--color-aeblack-800) 92%,
+    black
+  ) !important;
+  color: var(--color-whitely-50);
+}
+
+[data-theme="dark"] .app-field input,
+[data-theme="dark"] .app-field textarea,
+[data-theme="dark"] .app-select {
+  color: var(--color-whitely-50);
+}
+
+[data-theme="dark"] .app-field input::placeholder,
+[data-theme="dark"] .app-field textarea::placeholder {
+  color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 54%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .tags-filter-trigger {
+  background: color-mix(
+    in oklab,
+    var(--color-aeblack-800) 92%,
+    black
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 18%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .tags-filter-trigger:hover {
+  background: color-mix(
+    in oklab,
+    var(--color-primary-700) 18%,
+    var(--color-aeblack-800)
+  ) !important;
+}
+
+[data-theme="dark"] .service-tag-option[aria-pressed="true"] {
+  background-color: var(--color-primary-600) !important;
+  border-color: var(--color-primary-500) !important;
+  color: var(--color-whitely-50) !important;
+}
+
+[data-theme="dark"] .app-textarea-counter {
+  background: color-mix(
+    in oklab,
+    var(--color-aeblack-800) 92%,
+    black
+  ) !important;
+  color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 72%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] [data-radix-popper-content-wrapper] [role="option"] {
+  background: color-mix(in oklab, var(--color-aeblack-800) 92%, black);
+  color: var(--color-whitely-50);
+}
+
+[data-theme="dark"]
+  [data-radix-popper-content-wrapper]
+  [role="option"][data-highlighted] {
+  background: color-mix(
+    in oklab,
+    var(--color-primary-700) 34%,
+    var(--color-aeblack-800)
+  );
+}
+[data-theme="dark"] .app-breadcrumbs,
+[data-theme="dark"] .app-breadcrumbs a,
+[data-theme="dark"] .app-breadcrumbs li,
+[data-theme="dark"] .app-breadcrumbs span,
+[data-theme="dark"] .app-breadcrumbs svg {
+  color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 76%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .app-breadcrumbs a:hover {
+  color: var(--color-whitely-50) !important;
+}
+[data-theme="dark"] .service-banner {
+  filter: saturate(0.86) brightness(0.9);
+  box-shadow: inset 0 0 0 1px
+    color-mix(in oklab, var(--color-whitely-50) 18%, transparent);
+}
+[data-theme="dark"] .aegov-badge.bg-seablue-50,
+[data-theme="dark"] .service-chip.bg-seablue-50 {
+  background-color: color-mix(
+    in oklab,
+    var(--color-seablue-800) 34%,
+    var(--color-aeblack-800)
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-seablue-400) 46%,
+    transparent
+  ) !important;
+  color: color-mix(in oklab, var(--color-seablue-100) 90%, white) !important;
+}
+
+[data-theme="dark"] .aegov-badge.bg-techblue-50,
+[data-theme="dark"] .service-chip.bg-techblue-50 {
+  background-color: color-mix(
+    in oklab,
+    var(--color-techblue-800) 34%,
+    var(--color-aeblack-800)
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-techblue-400) 46%,
+    transparent
+  ) !important;
+  color: color-mix(in oklab, var(--color-techblue-100) 90%, white) !important;
+}
+
+[data-theme="dark"] .aegov-badge.bg-aegreen-50,
+[data-theme="dark"] .service-chip.bg-aegreen-50 {
+  background-color: color-mix(
+    in oklab,
+    var(--color-aegreen-800) 34%,
+    var(--color-aeblack-800)
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-aegreen-400) 46%,
+    transparent
+  ) !important;
+  color: color-mix(in oklab, var(--color-aegreen-100) 90%, white) !important;
+}
+
+[data-theme="dark"] .aegov-badge.bg-primary-50,
+[data-theme="dark"] .service-chip.bg-primary-50 {
+  background-color: color-mix(
+    in oklab,
+    var(--color-primary-700) 42%,
+    var(--color-aeblack-800)
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-primary-300) 52%,
+    transparent
+  ) !important;
+  color: color-mix(in oklab, var(--color-primary-50) 92%, white) !important;
+}
+
+[data-theme="dark"] .aegov-badge.bg-secondary-50,
+[data-theme="dark"] .service-chip.bg-secondary-50 {
+  background-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 12%,
+    var(--color-aeblack-800)
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 22%,
+    transparent
+  ) !important;
+  color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 88%,
+    transparent
+  ) !important;
+}
+
+[data-theme="dark"] .aegov-badge.bg-aered-50,
+[data-theme="dark"] .service-chip.bg-aered-50 {
+  background-color: color-mix(
+    in oklab,
+    var(--color-aered-800) 34%,
+    var(--color-aeblack-800)
+  ) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-aered-400) 46%,
+    transparent
+  ) !important;
+  color: color-mix(in oklab, var(--color-aered-100) 90%, white) !important;
+}
+[data-theme="dark"] .app-theme-toggle [role="switch"] > span {
+  color: var(--color-whitely-50) !important;
+}

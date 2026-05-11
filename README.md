@@ -44,15 +44,17 @@ On top of the assignment baseline, the project includes:
 - Tags filter modal.
 - Sorting by date, title, processing time, and fee.
 - Pagination with 9 services per page.
-- Filter state saved in URL params.
+- Filter state saved in URL params and restored from localStorage when returning to the services page.
 - Loading skeletons.
 - Empty and error states.
 - Toast feedback for create, edit, delete, reset, favorite, and start actions.
 - English and Arabic translations.
 - RTL support for Arabic.
 - Dark mode toggle.
+- Animated project overview drawer rendered from the README.
 - Yup validation.
 - Focused unit tests.
+- Explicit Prettier and editor formatting setup.
 - Vercel routing configuration.
 
 ## UAE Design System Usage
@@ -137,7 +139,7 @@ Filters are also client-side. The app supports:
 - Sort option.
 - Current page.
 
-Filter and sort state is stored in URL params/query string so the current view can be refreshed or shared.
+Filter and sort state is stored in URL params/query string so the current view can be refreshed or shared. The latest services-directory state is also saved in localStorage, so if a user moves to Favorites and comes back to Services, the previously applied filters, search, sort, and page are restored.
 
 ## UI States
 
@@ -201,6 +203,20 @@ Covered areas include:
 - Form validation.
 - Language switching.
 
+Service feature tests live under:
+
+```txt
+src/features/Services/__tests__/
+```
+
+Layout tests live beside the layout layer under:
+
+```txt
+src/components/layout/__tests__/
+```
+
+This keeps production feature folders easier to scan while keeping tests close to the behavior they cover.
+
 ## AI Assistance Note
 
 I used AI as a support tool for repetitive and review-heavy work, not as a replacement for planning or implementation ownership.
@@ -220,6 +236,7 @@ src/
   hooks/               useQuery, useDebounce, useLocalStorage
   i18n/                English and Arabic translations
   routes/              route configuration
+  test/                shared test setup and mocks
 ```
 
 ## Author
