@@ -158,6 +158,70 @@ textarea {
   ) !important;
 }
 
+.app-drawer-content[data-state="open"] {
+  animation: app-drawer-slide-in 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-drawer-content[data-state="closed"] {
+  animation: app-drawer-slide-out 180ms cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+@keyframes app-drawer-slide-in {
+  from {
+    opacity: 0.92;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes app-drawer-slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0.92;
+    transform: translateX(100%);
+  }
+}
+
+[dir="rtl"] .app-drawer-content[data-state="open"] {
+  animation-name: app-drawer-slide-in-rtl;
+}
+
+[dir="rtl"] .app-drawer-content[data-state="closed"] {
+  animation-name: app-drawer-slide-out-rtl;
+}
+
+@keyframes app-drawer-slide-in-rtl {
+  from {
+    opacity: 0.92;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes app-drawer-slide-out-rtl {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0.92;
+    transform: translateX(-100%);
+  }
+}
+
 [data-theme="dark"] .shadow-sm,
 [data-theme="dark"] .shadow-soft {
   box-shadow:

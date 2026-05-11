@@ -1,176 +1,170 @@
 import {
-	AppBreadcrumbs,
-	AppButton,
-	AppCurrencyAmount,
-} from '../../../components/common/design-system';
-import { EmptyState } from '../../../components/common/EmptyState';
-import { ErrorState } from '../../../components/common/ErrorState';
-import { SkeletonCard } from '../../../components/common/SkeletonCard';
-import { ServiceBanner } from '../components/ServiceBanner';
-import { useServiceDetails } from '../hooks/useServiceDetails';
+  AppBreadcrumbs,
+  AppButton,
+  AppCurrencyAmount,
+} from "../../../components/common/design-system";
+import { EmptyState } from "../../../components/common/EmptyState";
+import { ErrorState } from "../../../components/common/ErrorState";
+import { SkeletonCard } from "../../../components/common/SkeletonCard";
+import { ServiceBanner } from "../components/ServiceBanner";
+import { useServiceDetails } from "../hooks/useServiceDetails";
 import {
-	categoryBadgeClass,
-	statusBadgeClass,
-	tagBadgeClass,
-} from '../utils/serviceBadgeStyles';
+  categoryBadgeClass,
+  statusBadgeClass,
+  tagBadgeClass,
+} from "../utils/serviceBadgeStyles";
 
 export function ServiceDetailsPage() {
-	const {
-		error,
-		favoriteBusy,
-		goBackToServices,
-		handleStartService,
-		handleToggleFavorite,
-		i18n,
-		isLoading,
-		localizedService,
-		refetch,
-		service,
-		t,
-	} = useServiceDetails();
+  const {
+    error,
+    favoriteBusy,
+    goBackToServices,
+    handleStartService,
+    handleToggleFavorite,
+    i18n,
+    isLoading,
+    localizedService,
+    refetch,
+    service,
+    t,
+  } = useServiceDetails();
 
-	if (isLoading)
-		return (
-			<section className='motion-page'>
-				<SkeletonCard />
-			</section>
-		);
+  if (isLoading)
+    return (
+      <section className="motion-page">
+        <SkeletonCard />
+      </section>
+    );
 
-	if (error) return <ErrorState onRetry={refetch} />;
+  if (error) return <ErrorState onRetry={refetch} />;
 
-	if (!service || !localizedService)
-		return (
-			<EmptyState
-				title={t('serviceNotFound')}
-				message={t('serviceNotFoundHelp')}
-				actionLabel={t('backToServices')}
-				onAction={goBackToServices}
-			/>
-		);
+  if (!service || !localizedService)
+    return (
+      <EmptyState
+        title={t("serviceNotFound")}
+        message={t("serviceNotFoundHelp")}
+        actionLabel={t("backToServices")}
+        onAction={goBackToServices}
+      />
+    );
 
-	const tagItems = service.tags.map((tag, index) => ({
-		tag,
-		localizedTag: localizedService.tags[index] ?? tag,
-	}));
+  const tagItems = service.tags.map((tag, index) => ({
+    tag,
+    localizedTag: localizedService.tags[index] ?? tag,
+  }));
 
-	const feeContent =
-		service.fee === 0 ? (
-			localizedService.feeLabel
-		) : (
-			<AppCurrencyAmount
-				amount={service.fee}
-				locale={i18n.language}
-			/>
-		);
+  const feeContent =
+    service.fee === 0 ? (
+      localizedService.feeLabel
+    ) : (
+      <AppCurrencyAmount amount={service.fee} locale={i18n.language} />
+    );
 
-	const badgeElements = (
-		<div className='mb-4 flex flex-wrap gap-2'>
-			<span
-				className={`aegov-badge badge-base ${categoryBadgeClass[service.category]}`}
-			>
-				{localizedService.category}
-			</span>
+  const badgeElements = (
+    <div className="mb-4 flex flex-wrap gap-2">
+      <span
+        className={`aegov-badge badge-base ${categoryBadgeClass[service.category]}`}
+      >
+        {localizedService.category}
+      </span>
 
-			<span
-				className={`aegov-badge badge-base ${statusBadgeClass[service.status]}`}
-			>
-				{localizedService.status}
-			</span>
+      <span
+        className={`aegov-badge badge-base ${statusBadgeClass[service.status]}`}
+      >
+        {localizedService.status}
+      </span>
 
-			{service.isPopular && (
-				<span className={`aegov-badge badge-base ${tagBadgeClass.Popular}`}>
-					{t('popular')}
-				</span>
-			)}
-		</div>
-	);
+      {service.isPopular && (
+        <span className={`aegov-badge badge-base ${tagBadgeClass.Popular}`}>
+          {t("popular")}
+        </span>
+      )}
+    </div>
+  );
 
-	const tagElements = (
-		<div className='mt-5 flex flex-wrap gap-2'>
-			{tagItems.map(({ tag, localizedTag }) => (
-				<span
-					key={tag}
-					className={`aegov-badge badge-base ${tagBadgeClass[tag]}`}
-				>
-					{localizedTag}
-				</span>
-			))}
-		</div>
-	);
+  const tagElements = (
+    <div className="mt-5 flex flex-wrap gap-2">
+      {tagItems.map(({ tag, localizedTag }) => (
+        <span
+          key={tag}
+          className={`aegov-badge badge-base ${tagBadgeClass[tag]}`}
+        >
+          {localizedTag}
+        </span>
+      ))}
+    </div>
+  );
 
-	const detailsMetaElement = (
-		<dl className='grid gap-4'>
-			<div>
-				<dt className='text-sm font-semibold text-slate-500'>
-					{t('processingTime')}
-				</dt>
+  const detailsMetaElement = (
+    <dl className="grid gap-4">
+      <div>
+        <dt className="text-sm font-semibold text-slate-500">
+          {t("processingTime")}
+        </dt>
 
-				<dd className='mt-1 text-lg font-bold text-aeblack-800'>
-					{localizedService.processingTimeLabel}
-				</dd>
-			</div>
+        <dd className="mt-1 text-lg font-bold text-aeblack-800">
+          {localizedService.processingTimeLabel}
+        </dd>
+      </div>
 
-			<div>
-				<dt className='text-sm font-semibold text-slate-500'>{t('fee')}</dt>
+      <div>
+        <dt className="text-sm font-semibold text-slate-500">{t("fee")}</dt>
 
-				<dd className='mt-1 text-lg font-bold text-aeblack-800'>
-					{feeContent}
-				</dd>
-			</div>
-		</dl>
-	);
+        <dd className="mt-1 text-lg font-bold text-aeblack-800">
+          {feeContent}
+        </dd>
+      </div>
+    </dl>
+  );
 
-	const actionsElement = (
-		<div className='mt-6 grid gap-3'>
-			<AppButton onClick={handleStartService}>{t('start')}</AppButton>
+  const actionsElement = (
+    <div className="mt-6 grid gap-3">
+      <AppButton onClick={handleStartService}>{t("start")}</AppButton>
 
-			<AppButton
-				variant='secondary'
-				onClick={handleToggleFavorite}
-				disabled={favoriteBusy}
-			>
-				{service.isFavorite ? t('unfavorite') : t('favorite')}
-			</AppButton>
-		</div>
-	);
+      <AppButton
+        variant="secondary"
+        onClick={handleToggleFavorite}
+        disabled={favoriteBusy}
+      >
+        {service.isFavorite ? t("unfavorite") : t("favorite")}
+      </AppButton>
+    </div>
+  );
 
-	return (
-		<article className='motion-page'>
-			<AppBreadcrumbs
-				items={[
-					{ label: t('services'), href: '/' },
-					{ label: localizedService.title },
-				]}
-			/>
+  return (
+    <article className="motion-page">
+      <AppBreadcrumbs
+        items={[
+          { label: t("services"), href: "/" },
+          { label: localizedService.title },
+        ]}
+      />
 
-			<div className='overflow-hidden rounded-lg border border-primary-100 bg-white shadow-soft'>
-				<ServiceBanner
-					service={service}
-					size='details'
-				/>
+      <div className="overflow-hidden rounded-lg border border-primary-100 bg-white shadow-soft">
+        <ServiceBanner service={service} size="details" />
 
-				<div className='grid gap-6 p-5 lg:grid-cols-[1fr_320px] lg:p-6'>
-					<div>
-						{badgeElements}
+        <div className="grid gap-6 p-5 lg:grid-cols-[1fr_320px] lg:p-6">
+          <div>
+            {badgeElements}
 
-						<h1 className='text-3xl font-bold text-aeblack-800'>
-							{localizedService.title}
-						</h1>
+            <h1 className="text-3xl font-bold text-aeblack-800">
+              {localizedService.title}
+            </h1>
 
-						<p className='mt-4 max-w-3xl text-base leading-7 text-slate-600'>
-							{localizedService.description}
-						</p>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
+              {localizedService.description}
+            </p>
 
-						{tagElements}
-					</div>
+            {tagElements}
+          </div>
 
-					<aside className='rounded-lg border border-slate-200 bg-whitely-50 p-5'>
-						{detailsMetaElement}
+          <aside className="rounded-lg border border-slate-200 bg-whitely-50 p-5">
+            {detailsMetaElement}
 
-						{actionsElement}
-					</aside>
-				</div>
-			</div>
-		</article>
-	);
+            {actionsElement}
+          </aside>
+        </div>
+      </div>
+    </article>
+  );
 }

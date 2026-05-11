@@ -1,10 +1,7 @@
-import type { SVGProps } from 'react';
+import type { SVGProps } from "react";
 
 const Icon = (props: SVGProps<SVGSVGElement>) => (
-	<svg
-		aria-hidden='true'
-		{...props}
-	/>
+  <svg aria-hidden="true" {...props} />
 );
 
 export const BookOpenText = Icon;

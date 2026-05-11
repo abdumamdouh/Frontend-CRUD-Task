@@ -1,1 +1,1 @@
-export { servicesRoutes } from './routes';
+export { servicesRoutes } from "./routes";
