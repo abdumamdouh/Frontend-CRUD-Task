@@ -42,7 +42,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-primary-100 bg-whitely-50/95 backdrop-blur">
-      <div className="absolute right-4 top-3 z-10">
+      <div className="absolute top-3 inset-e-4 z-10">
         <AppTooltip
           content={colorMode === "dark" ? t("lightMode") : t("darkMode")}
         >
