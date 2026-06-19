@@ -178,9 +178,9 @@ uae-services-directory .py-8 {
   }
 }
 
-button,
-input,
-select,
-textarea {
+uae-services-directory button,
+uae-services-directory input,
+uae-services-directory select,
+uae-services-directory textarea {
   font: inherit;
 }

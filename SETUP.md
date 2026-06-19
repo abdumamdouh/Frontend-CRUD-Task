@@ -34,10 +34,10 @@ npm run dev
 Vite will print a local URL, usually:
 
 ```txt
-http://localhost:5173
+http://localhost:3000
 ```
 
-If that port is busy, Vite may choose another port.
+The Vite config uses `strictPort`, so stop the other process if port `3000` is busy.
 
 ## Build For Production
 
@@ -48,13 +48,13 @@ npm run build
 The build command runs TypeScript first, then creates the production build with Vite:
 
 ```txt
-tsc -b && vite build
+tsc -b && node scripts/build.mjs
 ```
 
 The generated production files are written to:
 
 ```txt
-dist/
+build/static/
 ```
 
 ## Preview The Production Build
@@ -65,7 +65,7 @@ After building:
 npm run preview
 ```
 
-This serves the built `dist/` output locally.
+This serves the built output locally.
 
 ## Run Tests
 
@@ -118,7 +118,7 @@ The project uses an explicit Prettier config in `.prettierrc`, plus `.editorconf
 ```json
 {
   "dev": "vite",
-  "build": "tsc -b && vite build",
+  "build": "tsc -b && node scripts/build.mjs",
   "preview": "vite preview",
   "test": "vitest",
   "test:ui": "vitest --ui",

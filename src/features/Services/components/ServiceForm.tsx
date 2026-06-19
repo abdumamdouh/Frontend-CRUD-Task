@@ -168,7 +168,7 @@ export function ServiceForm({
         showCount
         onChange={(event) => handleDescriptionChange(event.target.value)}
         error={errors.description}
-        rows={4}
+        rows={3}
       />
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -250,7 +250,7 @@ export function ServiceForm({
         label={t("isPopular")}
       />
 
-      <div className="flex justify-end gap-3 border-t border-slate-200 pt-4">
+      <div className="sticky bottom-0 z-10 -mx-5 -mb-5 flex justify-end gap-3 border-t border-slate-200 bg-white px-5 py-4 dark:border-slate-700 dark:bg-slate-950">
         <AppButton variant="secondary" onClick={onCancel}>
           {t("cancel")}
         </AppButton>

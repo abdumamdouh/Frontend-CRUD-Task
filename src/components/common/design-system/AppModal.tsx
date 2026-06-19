@@ -25,7 +25,7 @@ const overlayClassName =
   "app-modal-overlay fixed inset-0 z-50 bg-aeblack-950/45 backdrop-blur-sm";
 
 const contentBaseClassName =
-  "app-modal-content fixed z-50 max-h-[92vh] w-[calc(100%-2rem)] overflow-y-auto rounded-lg border border-slate-200 bg-white shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-slate-700 dark:bg-slate-950";
+  "app-modal-content fixed z-50 flex max-h-[92vh] w-[calc(100%-2rem)] flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-slate-700 dark:bg-slate-950";
 
 export function AppModal({
   isOpen,
@@ -70,7 +70,7 @@ export function AppModal({
             </Close>
           </div>
 
-          <div className="p-5">{children}</div>
+          <div className="app-modal-body overflow-y-auto p-5">{children}</div>
         </Content>
       </Portal>
     </Root>
