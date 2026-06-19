@@ -1,6 +1,18 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath, URL } from "node:url";
+import { loadDevLiferayCredentials } from "./scripts/loadDevEnv";
+
+const liferayShimPath = fileURLToPath(new URL("./src/dev/liferayShim.ts", import.meta.url));
+const liferayShimStubPath = fileURLToPath(
+  new URL("./src/dev/liferayShim.stub.ts", import.meta.url),
+);
+
+const { user: liferayUser, password: liferayPassword } = loadDevLiferayCredentials();
+const liferayAuthHeader =
+  liferayUser && liferayPassword
+    ? `Basic ${Buffer.from(`${liferayUser}:${liferayPassword}`).toString("base64")}`
+    : "";
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
@@ -17,6 +29,19 @@ export default defineConfig(({ mode }) => ({
     cors: {
       origin: "http://localhost:8080",
     },
+    proxy: {
+      "/o": {
+        changeOrigin: true,
+        configure: (proxy) => {
+          proxy.on("proxyReq", (proxyReq) => {
+            if (liferayAuthHeader && !proxyReq.getHeader("authorization")) {
+              proxyReq.setHeader("Authorization", liferayAuthHeader);
+            }
+          });
+        },
+        target: "http://localhost:8080",
+      },
+    },
   },
   resolve:
     mode === "test"
@@ -27,7 +52,11 @@ export default defineConfig(({ mode }) => ({
             ),
           },
         }
-      : undefined,
+      : mode === "production"
+        ? {
+            [liferayShimPath]: liferayShimStubPath,
+          }
+        : undefined,
   build: {
     outDir: "build/static",
     emptyOutDir: true,

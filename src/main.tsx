@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import type { Root } from "react-dom/client";
 import App from "./App";
+import "./dev/liferayShim";
 import "./i18n";
 import "./index.css";
 

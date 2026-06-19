@@ -1,4 +1,9 @@
 {
   "elementName": "uae-services-directory",
-  "title": "UAE Service Directory"
+  "title": "UAE Service Directory",
+  "liferayApi": {
+    "enabled": true,
+    "healthPath": "/o/c/uaeservices?pageSize=1",
+    "proxyPrefix": "/api/liferay"
+  }
 }
