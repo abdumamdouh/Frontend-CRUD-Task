@@ -24,6 +24,7 @@ export const serviceStatuses: ServiceStatus[] = [
 ];
 
 export const serviceTags: ServiceTag[] = [
+  "Vehicles",
   "Individuals",
   "Business",
   "Renewal",

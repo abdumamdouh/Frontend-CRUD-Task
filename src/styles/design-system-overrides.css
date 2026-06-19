@@ -148,28 +148,44 @@ uae-services-directory .app-select {
   border-radius: 0.75rem;
   box-shadow:
     0 1px 2px color-mix(in oklab, var(--color-aeblack-900) 4%, transparent),
-    inset 0 0 0 1px color-mix(in oklab, var(--color-slate-200) 70%, transparent);
+    inset 0 0 0 1px color-mix(in oklab, var(--color-slate-200) 70%, transparent) !important;
 }
 
-uae-services-directory .app-field:focus-within,
-uae-services-directory .app-select:focus,
-uae-services-directory .app-select[data-state="open"] {
+uae-services-directory .app-select {
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--color-aeblack-900) 4%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, var(--color-aegold-700) 34%, var(--color-slate-200)) !important;
+}
+
+uae-services-directory .app-field:focus-within {
   --tw-ring-color: var(--color-primary-200);
   box-shadow:
     0 0 0 3px color-mix(in oklab, var(--color-primary-100) 70%, transparent),
-    inset 0 0 0 1px var(--color-primary-200);
+    inset 0 0 0 1px var(--color-primary-200) !important;
+}
+
+uae-services-directory .app-select:focus,
+uae-services-directory .app-select[data-state="open"] {
+  --tw-ring-color: color-mix(
+    in oklab,
+    var(--color-aegold-700) 32%,
+    transparent
+  );
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--color-aegold-700) 14%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, var(--color-aegold-700) 72%, transparent) !important;
 }
 
 uae-services-directory .app-select.app-select--error {
   box-shadow:
     0 1px 2px color-mix(in oklab, var(--color-aeblack-900) 4%, transparent),
-    inset 0 0 0 1px var(--color-aered-500);
+    inset 0 0 0 1px var(--color-aered-500) !important;
 }
 
 uae-services-directory .app-select.app-select--error:focus {
   box-shadow:
     0 0 0 3px color-mix(in oklab, var(--color-aered-100) 70%, transparent),
-    inset 0 0 0 1px var(--color-aered-500);
+    inset 0 0 0 1px var(--color-aered-500) !important;
 }
 
 uae-services-directory .app-field input::placeholder,

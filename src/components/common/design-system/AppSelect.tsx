@@ -69,7 +69,7 @@ export function AppSelect({
           aria-label={accessibleLabel}
           aria-describedby={helperId}
           aria-invalid={Boolean(error)}
-          className={`app-select w-full appearance-none rounded-lg bg-whitely-50 px-4 pe-10 text-left shadow-sm outline-none transition ${
+          className={`app-select w-full appearance-none rounded-lg bg-whitely-50 px-4 pe-10 text-left outline-none transition ${
             error ? "app-select--error" : ""
           } ${sizeClassNames[size]} ${
             disabled ? "cursor-not-allowed opacity-40" : ""

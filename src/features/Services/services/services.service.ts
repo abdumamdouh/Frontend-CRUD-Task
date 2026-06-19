@@ -1,6 +1,7 @@
 import { appTheme } from "../../../config/theme";
 import { initialServices } from "../data/initialServices";
 import type { Service, ServicePayload } from "../types/service";
+import { liferayObjectApi } from "./liferayObjectApi";
 
 const { services: servicesKey } = appTheme.storageKeys;
 
@@ -60,6 +61,17 @@ const saveServices = (services: Service[]): Service[] => {
   return clone(services);
 };
 
+const tryLiferayObjectApi = async (
+  operation: () => Promise<Service[]>,
+  fallback: () => Promise<Service[]> | Service[],
+) => {
+  try {
+    return await operation();
+  } catch {
+    return fallback();
+  }
+};
+
 const makeService = (payload: ServicePayload): Service => {
   const processingTime = Number(payload.processingTime);
   const fee = Number(payload.fee);
@@ -79,14 +91,22 @@ const makeService = (payload: ServicePayload): Service => {
 export const servicesApi = {
   async getServices(): Promise<Service[]> {
     await delay();
-    return readServices();
+    return tryLiferayObjectApi(
+      () => liferayObjectApi.getServices(),
+      () => readServices(),
+    );
   },
 
   async createService(payload: ServicePayload): Promise<Service[]> {
     await delay();
-    const services = readServices();
-    const nextServices = [makeService(payload), ...services];
-    return saveServices(nextServices);
+    return tryLiferayObjectApi(
+      () => liferayObjectApi.createService(payload),
+      () => {
+        const services = readServices();
+        const nextServices = [makeService(payload), ...services];
+        return saveServices(nextServices);
+      },
+    );
   },
 
   async updateService(
@@ -95,57 +115,77 @@ export const servicesApi = {
     language = "en",
   ): Promise<Service[]> {
     await delay();
-    const services = readServices();
-    const nextServices = services.map((service) => {
-      if (service.id !== id) return service;
-      const processingTime = Number(payload.processingTime);
-      const fee = Number(payload.fee);
-      const isArabic = language.startsWith("ar");
+    return tryLiferayObjectApi(
+      () => liferayObjectApi.updateService(id, payload),
+      () => {
+        const services = readServices();
+        const nextServices = services.map((service) => {
+          if (service.id !== id) return service;
+          const processingTime = Number(payload.processingTime);
+          const fee = Number(payload.fee);
+          const isArabic = language.startsWith("ar");
 
-      return {
-        ...service,
-        ...payload,
-        title: isArabic ? service.title : payload.title,
-        description: isArabic ? service.description : payload.description,
-        translations: isArabic
-          ? {
-              ...service.translations,
-              ar: {
-                ...service.translations?.ar,
-                title: payload.title,
-                description: payload.description,
-              },
-            }
-          : service.translations,
-        processingTime,
-        processingTimeLabel: `${processingTime} minutes`,
-        fee,
-        feeLabel: fee === 0 ? "Free" : String(fee),
-      };
-    });
-    return saveServices(nextServices);
+          return {
+            ...service,
+            ...payload,
+            title: isArabic ? service.title : payload.title,
+            description: isArabic ? service.description : payload.description,
+            translations: isArabic
+              ? {
+                  ...service.translations,
+                  ar: {
+                    ...service.translations?.ar,
+                    title: payload.title,
+                    description: payload.description,
+                  },
+                }
+              : service.translations,
+            processingTime,
+            processingTimeLabel: `${processingTime} minutes`,
+            fee,
+            feeLabel: fee === 0 ? "Free" : String(fee),
+          };
+        });
+        return saveServices(nextServices);
+      },
+    );
   },
 
   async deleteService(id: string): Promise<Service[]> {
     await delay();
-    const nextServices = readServices().filter((service) => service.id !== id);
-    return saveServices(nextServices);
+    return tryLiferayObjectApi(
+      () => liferayObjectApi.deleteService(id),
+      () => {
+        const nextServices = readServices().filter((service) => service.id !== id);
+        return saveServices(nextServices);
+      },
+    );
   },
 
   async toggleFavorite(id: string): Promise<Service[]> {
     await delay(180);
-    const nextServices = readServices().map((service) =>
-      service.id === id
-        ? { ...service, isFavorite: !service.isFavorite }
-        : service,
+    return tryLiferayObjectApi(
+      () => liferayObjectApi.toggleFavorite(id),
+      () => {
+        const nextServices = readServices().map((service) =>
+          service.id === id
+            ? { ...service, isFavorite: !service.isFavorite }
+            : service,
+        );
+        return saveServices(nextServices);
+      },
     );
-    return saveServices(nextServices);
   },
 
   async resetServices(): Promise<Service[]> {
     await delay();
-    localStorage.removeItem(servicesKey);
-    localStorage.setItem(servicesKey, JSON.stringify(initialServices));
-    return clone(initialServices);
+    return tryLiferayObjectApi(
+      () => liferayObjectApi.resetServices(initialServices),
+      () => {
+        localStorage.removeItem(servicesKey);
+        localStorage.setItem(servicesKey, JSON.stringify(initialServices));
+        return clone(initialServices);
+      },
+    );
   },
 };
