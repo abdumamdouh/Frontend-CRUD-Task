@@ -15,7 +15,7 @@ export function LanguageSelect({ value, onChange }: LanguageSelectProps) {
   ];
 
   return (
-    <div className="min-w-32 [&_.app-select]:h-10 [&_.app-select]:py-2.5 [&_.app-select]:text-sm">
+    <div className="min-w-32">
       <AppSelect
         size="sm"
         value={value}

@@ -129,7 +129,7 @@ function ServicesToolbarComponent({
   const hiddenActiveFiltersCount = Math.max(activeFilters.length - 5, 0);
 
   const searchAndSortElement = (
-    <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(260px,0.8fr)_240px] [&_.app-select]:h-[58px] [&_.app-select]:py-4">
+    <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(260px,0.8fr)_240px] [&_.app-field]:h-12">
       <AppInput
         type="search"
         label={t("search")}

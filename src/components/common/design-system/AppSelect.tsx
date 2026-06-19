@@ -23,10 +23,16 @@ interface AppSelectProps {
   variant?: "primary" | "secondary";
 }
 
-const sizeClassNames = {
-  sm: "h-10 py-2.5 text-sm",
-  base: "h-12 py-3 text-base",
-  lg: "h-14 py-4 text-lg",
+const fieldSizeClassNames = {
+  sm: "h-10",
+  base: "h-12",
+  lg: "h-14",
+};
+
+const textSizeClassNames = {
+  sm: "text-sm",
+  base: "text-base",
+  lg: "text-lg",
 };
 
 export function AppSelect({
@@ -64,40 +70,42 @@ export function AppSelect({
       )}
 
       <div className="relative">
-        <select
-          id={selectId}
-          aria-label={accessibleLabel}
-          aria-describedby={helperId}
-          aria-invalid={Boolean(error)}
-          className={`app-select w-full appearance-none rounded-lg bg-whitely-50 px-4 pe-10 text-left outline-none transition ${
-            error ? "app-select--error" : ""
-          } ${sizeClassNames[size]} ${
-            disabled ? "cursor-not-allowed opacity-40" : ""
-          } ${className}`}
-          disabled={disabled}
-          onChange={(event) => onChange?.(event.target.value)}
-          required={required}
-          value={selectedValue}
+        <div
+          className={`app-field relative flex items-center rounded-lg bg-whitely-50 ${fieldSizeClassNames[size]} ${
+            error ? "bg-red-50 app-select--error" : ""
+          } ${disabled ? "opacity-40" : ""} ${className}`}
         >
-          {placeholder && (
-            <option value="" disabled={required}>
-              {placeholder}
-            </option>
-          )}
-          {options.map((option) => (
-            <option
-              key={option.value}
-              disabled={option.disabled}
-              value={option.value}
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
+          <select
+            id={selectId}
+            aria-label={accessibleLabel}
+            aria-describedby={helperId}
+            aria-invalid={Boolean(error)}
+            className={`app-select h-full w-full flex-1 appearance-none border-0 bg-transparent px-4 pe-10 text-left text-gray-900 outline-none transition focus:ring-0 disabled:cursor-not-allowed ${textSizeClassNames[size]}`}
+            disabled={disabled}
+            onChange={(event) => onChange?.(event.target.value)}
+            required={required}
+            value={selectedValue}
+          >
+            {placeholder && (
+              <option value="" disabled={required}>
+                {placeholder}
+              </option>
+            )}
+            {options.map((option) => (
+              <option
+                key={option.value}
+                disabled={option.disabled}
+                value={option.value}
+              >
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <CaretDown
           aria-hidden="true"
-          className="app-select-caret pointer-events-none text-aegold-700"
+          className="app-select-caret pointer-events-none text-gray-400"
           weight="bold"
         />
       </div>
