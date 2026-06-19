@@ -56,7 +56,7 @@ export function Header() {
         </AppTooltip>
       </div>
 
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 pe-20 sm:px-6 sm:pe-20 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:pe-20">
+      <div className="uae-app-header-inner mx-auto flex flex-col gap-4 px-4 py-5 pe-20 sm:px-6 sm:pe-20 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:pe-20">
         <Link
           to="/"
           className="block rounded-md no-underline outline-none focus-visible:ring-2 focus-visible:ring-primary-500"

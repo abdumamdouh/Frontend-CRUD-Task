@@ -10,6 +10,7 @@ import {
 } from "@radix-ui/react-dialog";
 import { X } from "@phosphor-icons/react";
 import { useTranslation } from "react-i18next";
+import { getClientExtensionPortalContainer } from "../../../utils/portalContainer";
 
 interface AppModalProps {
   isOpen: boolean;
@@ -45,7 +46,7 @@ export function AppModal({
 
   return (
     <Root open={isOpen} onOpenChange={handleOpenChange}>
-      <Portal>
+      <Portal container={getClientExtensionPortalContainer()}>
         <Overlay className={overlayClassName} />
 
         <Content

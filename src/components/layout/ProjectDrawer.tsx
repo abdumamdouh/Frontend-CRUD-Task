@@ -10,6 +10,7 @@ import {
 } from "@radix-ui/react-dialog";
 import { useTranslation } from "react-i18next";
 import readmeContent from "../../../README.md?raw";
+import { getClientExtensionPortalContainer } from "../../utils/portalContainer";
 import { MarkdownContent } from "../common/MarkdownContent";
 
 interface ProjectDrawerProps {
@@ -35,7 +36,7 @@ export function ProjectDrawer({ isOpen, onClose }: ProjectDrawerProps) {
 
   return (
     <Root open={isOpen} onOpenChange={handleOpenChange}>
-      <Portal>
+      <Portal container={getClientExtensionPortalContainer()}>
         <Overlay className={overlayClassName} />
 
         <Content

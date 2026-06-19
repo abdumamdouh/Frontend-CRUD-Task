@@ -1,0 +1,15 @@
+assemble:
+    - from: build/static
+      into: static
+uae-services-directory:
+    cssURLs:
+        - style.css
+    friendlyURLMapping: uae-services-directory
+    htmlElementName: uae-services-directory
+    instanceable: false
+    name: UAE Service Directory
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - index.js
+    useESM: false
