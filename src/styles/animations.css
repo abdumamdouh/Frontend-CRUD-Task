@@ -61,7 +61,7 @@ uae-services-directory [dir="rtl"] .app-drawer-content[data-state="closed"] {
     transform: translateX(-100%);
   }
 }
-@keyframes page-enter {
+@keyframes app-page-enter {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -72,7 +72,7 @@ uae-services-directory [dir="rtl"] .app-drawer-content[data-state="closed"] {
   }
 }
 
-@keyframes card-enter {
+@keyframes app-card-enter {
   from {
     opacity: 0;
     transform: translateY(14px) scale(0.99);
@@ -83,7 +83,7 @@ uae-services-directory [dir="rtl"] .app-drawer-content[data-state="closed"] {
   }
 }
 
-@keyframes modal-backdrop-enter {
+@keyframes app-modal-backdrop-enter {
   from {
     opacity: 0;
   }
@@ -92,7 +92,7 @@ uae-services-directory [dir="rtl"] .app-drawer-content[data-state="closed"] {
   }
 }
 
-@keyframes modal-panel-enter {
+@keyframes app-modal-panel-enter {
   from {
     opacity: 0;
     transform: translateY(12px) scale(0.985);
@@ -103,7 +103,7 @@ uae-services-directory [dir="rtl"] .app-drawer-content[data-state="closed"] {
   }
 }
 
-@keyframes toast-enter {
+@keyframes app-toast-enter {
   from {
     opacity: 0;
     transform: translateY(12px) scale(0.98);
@@ -114,7 +114,7 @@ uae-services-directory [dir="rtl"] .app-drawer-content[data-state="closed"] {
   }
 }
 
-@keyframes soft-shimmer {
+@keyframes app-soft-shimmer {
   0% {
     background-position: 120% 0;
   }
@@ -123,27 +123,27 @@ uae-services-directory [dir="rtl"] .app-drawer-content[data-state="closed"] {
   }
 }
 
-.motion-page {
-  animation: page-enter 280ms ease-out both;
+uae-services-directory .motion-page {
+  animation: app-page-enter 280ms ease-out both;
 }
 
-.motion-card {
-  animation: card-enter 320ms ease-out both;
+uae-services-directory .motion-card {
+  animation: app-card-enter 320ms ease-out both;
 }
 
-.motion-modal-backdrop {
-  animation: modal-backdrop-enter 160ms ease-out both;
+uae-services-directory .motion-modal-backdrop {
+  animation: app-modal-backdrop-enter 160ms ease-out both;
 }
 
-.motion-modal-panel {
-  animation: modal-panel-enter 220ms ease-out both;
+uae-services-directory .motion-modal-panel {
+  animation: app-modal-panel-enter 220ms ease-out both;
 }
 
-.motion-toast {
-  animation: toast-enter 220ms ease-out both;
+uae-services-directory .motion-toast {
+  animation: app-toast-enter 220ms ease-out both;
 }
 
-.motion-shimmer {
+uae-services-directory .motion-shimmer {
   background-image: linear-gradient(
     90deg,
     var(--color-aeblack-100) 0%,
@@ -151,12 +151,12 @@ uae-services-directory [dir="rtl"] .app-drawer-content[data-state="closed"] {
     var(--color-aeblack-100) 90%
   );
   background-size: 240% 100%;
-  animation: soft-shimmer 1.35s ease-in-out infinite;
+  animation: app-soft-shimmer 1.35s ease-in-out infinite;
 }
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  uae-services-directory *,
+  uae-services-directory *::before,
+  uae-services-directory *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
