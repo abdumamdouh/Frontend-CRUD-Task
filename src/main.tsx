@@ -6,6 +6,23 @@ import "./i18n";
 import "./index.css";
 
 const ELEMENT_NAME = "uae-services-directory";
+const LIFERAY_STYLE_PATH = "/o/uae-services-directory/style.css";
+
+function removeLiferayStylesAfterNavigation() {
+  window.setTimeout(() => {
+    if (document.querySelector(ELEMENT_NAME)) {
+      return;
+    }
+
+    document
+      .querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')
+      .forEach((link) => {
+        if (link.href.includes(LIFERAY_STYLE_PATH)) {
+          link.remove();
+        }
+      });
+  }, 0);
+}
 
 class UAEServicesDirectoryElement extends HTMLElement {
   #root: Root | null = null;
@@ -31,6 +48,7 @@ class UAEServicesDirectoryElement extends HTMLElement {
     this.#root = null;
     this.#mountPoint?.remove();
     this.#mountPoint = null;
+    removeLiferayStylesAfterNavigation();
   }
 }
 
@@ -40,10 +58,6 @@ if (!customElements.get(ELEMENT_NAME)) {
 
 const rootElement = import.meta.env.DEV ? document.getElementById("root") : null;
 
-if (rootElement) {
-  createRoot(rootElement).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-  );
+if (rootElement && !rootElement.querySelector(ELEMENT_NAME)) {
+  rootElement.appendChild(document.createElement(ELEMENT_NAME));
 }

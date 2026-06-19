@@ -19,7 +19,7 @@ interface ProjectDrawerProps {
 }
 
 const overlayClassName =
-  "fixed inset-0 z-50 bg-aeblack-950/45 backdrop-blur-sm data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0";
+  "app-drawer-overlay fixed inset-0 z-50 bg-aeblack-950/45 backdrop-blur-sm";
 
 const contentClassName =
   "app-drawer-content fixed inset-y-0 end-0 z-50 flex w-full max-w-2xl flex-col border-s border-slate-200 bg-white shadow-2xl outline-none sm:w-[min(42rem,92vw)]";

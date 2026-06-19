@@ -16,6 +16,11 @@ const getInitialColorMode = (): AppColorMode => {
   return "light";
 };
 
+const getClientExtensionRoot = () =>
+  document.querySelector<HTMLElement>(
+    "uae-services-directory .uae-services-directory-root",
+  );
+
 export function Header() {
   const { t, i18n } = useTranslation();
 
@@ -23,13 +28,15 @@ export function Header() {
   const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(false);
 
   useEffect(() => {
-    document.documentElement.lang = i18n.language;
-    document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr";
+    const root = getClientExtensionRoot();
+
+    root?.setAttribute("lang", i18n.language);
+    root?.setAttribute("dir", i18n.language === "ar" ? "rtl" : "ltr");
     localStorage.setItem(appTheme.storageKeys.language, i18n.language);
   }, [i18n.language]);
 
   useEffect(() => {
-    document.documentElement.dataset.theme = colorMode;
+    getClientExtensionRoot()?.setAttribute("data-theme", colorMode);
     localStorage.setItem(appTheme.storageKeys.theme, colorMode);
   }, [colorMode]);
 

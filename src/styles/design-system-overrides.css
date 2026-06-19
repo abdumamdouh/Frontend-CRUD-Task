@@ -16,6 +16,109 @@
   -webkit-mask: var(--app-aed-symbol-mask) center / contain no-repeat;
 }
 
+uae-services-directory .app-modal-overlay {
+  background: color-mix(
+    in oklab,
+    var(--color-aeblack-950) 45%,
+    transparent
+  ) !important;
+  inset: 0 !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  z-index: 9000 !important;
+}
+
+uae-services-directory .app-modal-content {
+  background: var(--color-whitely-50) !important;
+  border: 1px solid var(--color-slate-200) !important;
+  border-radius: 0.75rem !important;
+  box-shadow:
+    0 24px 64px color-mix(in oklab, var(--color-aeblack-950) 26%, transparent),
+    0 2px 8px color-mix(in oklab, var(--color-aeblack-950) 12%, transparent) !important;
+  color: var(--color-aeblack-800) !important;
+  bottom: 0 !important;
+  height: fit-content !important;
+  inset: 0 !important;
+  left: 0 !important;
+  margin: auto !important;
+  max-height: min(42rem, calc(100vh - 4rem)) !important;
+  opacity: 1 !important;
+  overflow-y: auto !important;
+  position: fixed !important;
+  right: 0 !important;
+  top: 0 !important;
+  transform: none !important;
+  translate: none !important;
+  width: min(calc(100vw - 2rem), 42rem) !important;
+  z-index: 9010 !important;
+}
+
+uae-services-directory .app-modal-content.max-w-4xl {
+  width: min(calc(100vw - 2rem), 64rem) !important;
+}
+
+uae-services-directory .app-modal-content.max-w-2xl {
+  width: min(calc(100vw - 2rem), 42rem) !important;
+}
+
+uae-services-directory [data-theme="dark"] .app-modal-content {
+  background: var(--color-aeblack-800) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 16%,
+    transparent
+  ) !important;
+  color: var(--color-whitely-50) !important;
+}
+
+uae-services-directory .app-drawer-overlay {
+  background: color-mix(
+    in oklab,
+    var(--color-aeblack-950) 45%,
+    transparent
+  ) !important;
+  inset: 0 !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  z-index: 9000 !important;
+}
+
+uae-services-directory .app-drawer-content {
+  background: var(--color-whitely-50) !important;
+  border-color: var(--color-slate-200) !important;
+  bottom: 0 !important;
+  box-shadow:
+    0 24px 64px color-mix(in oklab, var(--color-aeblack-950) 24%, transparent),
+    0 2px 8px color-mix(in oklab, var(--color-aeblack-950) 10%, transparent) !important;
+  color: var(--color-aeblack-800) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  max-width: min(42rem, calc(100vw - 2rem)) !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  right: 0 !important;
+  top: 0 !important;
+  transform: none !important;
+  translate: none !important;
+  width: min(42rem, 92vw) !important;
+  z-index: 9010 !important;
+}
+
+uae-services-directory [dir="rtl"] .app-drawer-content {
+  left: 0 !important;
+  right: auto !important;
+}
+
+uae-services-directory [data-theme="dark"] .app-drawer-content {
+  background: var(--color-aeblack-800) !important;
+  border-color: color-mix(
+    in oklab,
+    var(--color-whitely-50) 16%,
+    transparent
+  ) !important;
+  color: var(--color-whitely-50) !important;
+}
+
 .services-toolbar [class*="ring-secondary-400"],
 .services-toolbar [class*="ring-primary-400"] {
   --tw-ring-color: var(--color-slate-200);
@@ -107,11 +210,11 @@
   white-space: normal;
 }
 
-[data-theme="dark"] .app-breadcrumbs,
-[data-theme="dark"] .app-breadcrumbs a,
-[data-theme="dark"] .app-breadcrumbs li,
-[data-theme="dark"] .app-breadcrumbs span,
-[data-theme="dark"] .app-breadcrumbs svg {
+uae-services-directory [data-theme="dark"] .app-breadcrumbs,
+uae-services-directory [data-theme="dark"] .app-breadcrumbs a,
+uae-services-directory [data-theme="dark"] .app-breadcrumbs li,
+uae-services-directory [data-theme="dark"] .app-breadcrumbs span,
+uae-services-directory [data-theme="dark"] .app-breadcrumbs svg {
   color: color-mix(
     in oklab,
     var(--color-whitely-50) 76%,
@@ -119,7 +222,7 @@
   ) !important;
 }
 
-[data-theme="dark"] .app-breadcrumbs a:hover {
+uae-services-directory [data-theme="dark"] .app-breadcrumbs a:hover {
   color: var(--color-whitely-50) !important;
 }
 .app-theme-toggle {
@@ -182,7 +285,7 @@
   transform: none !important;
 }
 
-[data-theme="dark"] .app-theme-toggle [role="switch"] > span {
+uae-services-directory [data-theme="dark"] .app-theme-toggle [role="switch"] > span {
   color: var(--color-whitely-50) !important;
 }
 

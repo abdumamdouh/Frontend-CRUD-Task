@@ -2,7 +2,7 @@
   box-shadow: inset 0 0 0 1px color-mix(in oklab, white 35%, transparent);
 }
 
-[data-theme="dark"] .service-banner {
+uae-services-directory [data-theme="dark"] .service-banner {
   filter: saturate(0.86) brightness(0.9);
   box-shadow: inset 0 0 0 1px
     color-mix(in oklab, var(--color-whitely-50) 18%, transparent);

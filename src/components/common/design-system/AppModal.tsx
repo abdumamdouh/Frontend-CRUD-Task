@@ -22,10 +22,10 @@ interface AppModalProps {
 }
 
 const overlayClassName =
-  "fixed inset-0 z-50 bg-aeblack-950/45 backdrop-blur-sm data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0";
+  "app-modal-overlay fixed inset-0 z-50 bg-aeblack-950/45 backdrop-blur-sm";
 
 const contentBaseClassName =
-  "app-modal-content motion-modal-panel fixed left-1/2 top-1/2 z-50 max-h-[92vh] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg border border-slate-200 bg-white shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-slate-700 dark:bg-slate-950";
+  "app-modal-content fixed z-50 max-h-[92vh] w-[calc(100%-2rem)] overflow-y-auto rounded-lg border border-slate-200 bg-white shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-slate-700 dark:bg-slate-950";
 
 export function AppModal({
   isOpen,
