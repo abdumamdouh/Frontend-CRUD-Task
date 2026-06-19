@@ -119,6 +119,33 @@ uae-services-directory [data-theme="dark"] .app-drawer-content {
   color: var(--color-whitely-50) !important;
 }
 
+uae-services-directory [data-radix-popper-content-wrapper]:has(.app-tooltip-content) {
+  z-index: 9020 !important;
+}
+
+uae-services-directory .app-tooltip-content {
+  background: var(--color-aeblack-900) !important;
+  border-radius: 0.375rem !important;
+  box-shadow:
+    0 8px 24px color-mix(in oklab, var(--color-aeblack-950) 28%, transparent),
+    0 2px 6px color-mix(in oklab, var(--color-aeblack-950) 12%, transparent) !important;
+  color: var(--color-whitely-50) !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  max-width: min(32rem, calc(100vw - 2rem)) !important;
+  opacity: 1 !important;
+  overflow-wrap: anywhere !important;
+  padding: 0.5rem 1rem !important;
+  pointer-events: none !important;
+  white-space: normal !important;
+  width: max-content !important;
+  z-index: 9020 !important;
+}
+
+uae-services-directory .app-tooltip-arrow {
+  fill: var(--color-aeblack-900) !important;
+}
+
 uae-services-directory .services-toolbar [class*="ring-secondary-400"],
 uae-services-directory .services-toolbar [class*="ring-primary-400"] {
   --tw-ring-color: var(--color-slate-200);

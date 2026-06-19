@@ -17,6 +17,7 @@
   "dependencies": {
     "@aegov/design-system": "latest",
     "@aegov/design-system-react": "latest",
+    "@radix-ui/react-tooltip": "latest",
     "@vitejs/plugin-react": "4.5.1",
     "i18next": "latest",
     "react": "latest",

@@ -1,32 +1,71 @@
 import {
+  isValidElement,
   useLayoutEffect,
   useRef,
   useState,
-  type ComponentProps,
   type ReactNode,
 } from "react";
-import { Tooltip } from "@aegov/design-system-react";
+import {
+  Arrow,
+  Content,
+  Portal,
+  Root,
+  Trigger,
+} from "@radix-ui/react-tooltip";
+import { getClientExtensionPortalContainer } from "../../../utils/portalContainer";
 
-type AppTooltipProps = ComponentProps<typeof Tooltip>;
-interface TruncatedTooltipProps extends Omit<AppTooltipProps, "children"> {
+export interface AppTooltipProps {
   children: ReactNode;
-  forceWhen?: boolean;
+  content: ReactNode;
+  className?: string;
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "start" | "center" | "end";
+}
+
+const contentClassName = "app-tooltip-content";
+
+function TooltipTrigger({ children }: { children: ReactNode }) {
+  if (isValidElement(children)) {
+    return <Trigger asChild>{children}</Trigger>;
+  }
+
+  return (
+    <Trigger asChild>
+      <span className="inline-flex min-w-0 items-center gap-1">{children}</span>
+    </Trigger>
+  );
 }
 
 export function AppTooltip({
+  children,
+  content,
   side = "top",
   align = "center",
   className = "",
-  ...props
 }: AppTooltipProps) {
+  const mergedClassName = `${contentClassName} ${className}`.trim();
+
   return (
-    <Tooltip
-      side={side}
-      align={align}
-      className={`max-w-xs leading-6 ${className}`}
-      {...props}
-    />
+    <Root>
+      <TooltipTrigger>{children}</TooltipTrigger>
+      <Portal container={getClientExtensionPortalContainer()}>
+        <Content
+          side={side}
+          align={align}
+          sideOffset={4}
+          className={mergedClassName}
+        >
+          {content}
+          <Arrow className="app-tooltip-arrow" />
+        </Content>
+      </Portal>
+    </Root>
   );
+}
+
+interface TruncatedTooltipProps extends Omit<AppTooltipProps, "children"> {
+  children: ReactNode;
+  forceWhen?: boolean;
 }
 
 export function TruncatedTooltip({
