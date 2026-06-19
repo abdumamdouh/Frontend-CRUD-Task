@@ -178,6 +178,12 @@ uae-services-directory .app-field textarea::placeholder {
   opacity: 1;
 }
 
+uae-services-directory .app-description-textarea textarea,
+uae-services-directory textarea.app-description-textarea {
+  height: 4.8rem;
+  min-height: 4.8rem;
+}
+
 uae-services-directory .app-select-caret {
   display: block;
   height: 1.25rem;

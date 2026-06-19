@@ -161,6 +161,7 @@ export function ServiceForm({
       />
 
       <AppTextarea
+        className="app-description-textarea"
         label={t("description")}
         value={values.description}
         placeholder={t("description")}
